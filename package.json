@@ -1,0 +1,21 @@
+{
+  "name": "flipkart-playwright-automation",
+  "version": "1.0.0",
+  "description": "Flipkart E-commerce Automation Framework",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:ui": "npx playwright test --ui",
+    "test:headed": "npx playwright test --headed",
+    "test:chromium": "npx playwright test --project=chromium",
+    "test:firefox": "npx playwright test --project=firefox",
+    "test:webkit": "npx playwright test --project=webkit",
+    "test:api": "npx playwright test tests/api",
+    "test:report": "npx playwright show-report",
+    "test:debug": "npx playwright test --debug"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^24.19.2",
+    "typescript": "^5.9.0"
+  }
+}
