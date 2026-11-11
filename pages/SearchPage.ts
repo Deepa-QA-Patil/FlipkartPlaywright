@@ -34,6 +34,7 @@ export class SearchPage extends BasePage {
 
   async openFirstProduct(): Promise<void> {
     await this.productLinks.first().click();
+    //added
   }
 
 }
