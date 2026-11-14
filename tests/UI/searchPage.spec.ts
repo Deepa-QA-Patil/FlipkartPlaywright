@@ -1,29 +1,25 @@
-import { test, expect } from '../../Fixtures/testFixtures';
+import { test, expect } from '@playwright/test';
+import { SearchData } from '..//../test-data/SearchData';
 
-test.describe('Flipkart Homepage', () => {
+for (const data of SearchData) {
 
-  test('Verify homepage title', async ({ page, homePage }) => {
+  test(`Verify Flipkart search for ${data.searchTerm}`, async ({ page }) => {
 
-    await homePage.openHomePage();
+    await page.goto('https://www.flipkart.com/');
+    await page.getByText('✕').click();
 
-    await expect(page).toHaveTitle(/Online Shopping Site for/i);
+    const searchBox = page.getByPlaceholder('Search for Products, Brands and More').first();
 
-  });
+    await searchBox.fill(data.searchTerm);
+    await searchBox.press('Enter');
 
-  test('Verify search box is visible', async ({ homePage }) => {
+    await expect(page).toHaveURL(/search/);
 
-    await homePage.openHomePage();
-
-    await homePage.verifySearchBox();
-
-  });
-
-  test('Verify homepage URL', async ({ page, homePage }) => {
-
-    await homePage.openHomePage();
-
-    await expect(page).toHaveURL(/flipkart\.com/);
+    await expect(page.locator('body')).toContainText(
+      data.searchTerm,
+      { ignoreCase: true }
+    );
 
   });
 
-});
+}
